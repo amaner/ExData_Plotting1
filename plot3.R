@@ -25,6 +25,8 @@ powdat <- rbind(subset(powdat,powdat$Date == "1/2/2007"), subset(powdat,powdat$D
 
 ## pull off date and time columns to convert them
 tmp <- as.data.frame(paste(powdat$Date,powdat$Time))
+## name the column
+colnames(tmp) <- "Date_Time"
 ## convert to actual date times
 tmp <- strptime(tmp$Date_Time, format="%d/%m/%Y %H:%M:%S")
 ## add this as a column to powdat, removing the old date and time columns
@@ -41,7 +43,7 @@ lines(powdat$Date_Time, powdat$Sub_metering_1, col="black")
 ## add red sub_metering_2 line
 lines(powdat$Date_Time, powdat$Sub_metering_2, col="red")
 ## add blue sub_metering_3 line
-lines(powdat$Date_Time, powdat$Sub_metering_2, col="blue")
+lines(powdat$Date_Time, powdat$Sub_metering_3, col="blue")
 ## set the legend
 ## first argument sets it at top right
 ## second argument sets the labels
