@@ -23,6 +23,8 @@ powdat <- rbind(subset(powdat,powdat$Date == "1/2/2007"), subset(powdat,powdat$D
 
 ## pull off date and time columns to convert them
 tmp <- as.data.frame(paste(powdat$Date,powdat$Time))
+## name the column
+colnames(tmp) <- "Date_Time"
 ## convert to actual date times
 tmp <- strptime(tmp$Date_Time, format="%d/%m/%Y %H:%M:%S")
 ## add this as a column to powdat, removing the old date and time columns

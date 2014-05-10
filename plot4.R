@@ -28,6 +28,8 @@ powdat <- rbind(subset(powdat,powdat$Date == "1/2/2007"), subset(powdat,powdat$D
 
 ## pull off date and time columns to convert them
 tmp <- as.data.frame(paste(powdat$Date,powdat$Time))
+## name the column
+colnames(tmp) <- "Date_Time"
 ## convert to actual date times
 tmp <- strptime(tmp$Date_Time, format="%d/%m/%Y %H:%M:%S")
 ## add this as a column to powdat, removing the old date and time columns
@@ -47,7 +49,7 @@ plot(powdat$Date_Time, powdat$Voltage, type="n", ylab="Voltage", xlab="datetime"
 ## add the line chart
 lines(powdat$Date_Time, powdat$Voltage)
 ## set up the bottom left - submetering 1:3 vs date_time
-plot(powdate$Date_Time, powdat$Sub_metering_1, type="n", ylab="Energy sub metering", xlab="")
+plot(powdat$Date_Time, powdat$Sub_metering_1, type="n", ylab="Energy sub metering", xlab="")
 ## add the lines
 lines(powdat$Date_Time, powdat$Sub_metering_1, col="black")
 lines(powdat$Date_Time, powdat$Sub_metering_2, col="red")
@@ -56,6 +58,8 @@ lines(powdat$Date_Time, powdat$Sub_metering_3, col="blue")
 legend("topright", c("Sub_metering_1","Sub_metering_2","Sub_metering_3"), lty=c(1,1,1), cex=0.5, bg="white", box.col="white", col=c("black","red","blue"))
 ## set up the bottom right - global_reactive_power vs date_time
 plot(powdat$Date_Time, powdat$Global_reactive_power, type="n", xlab="datetime", ylab="Global_reactive_power")
+## add the line chart
+lines(powdat$Date_Time, powdat$Global_reactive_power)
 
 ## copy the image to a png file
 dev.copy(png, 'plot4.png')
